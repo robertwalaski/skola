@@ -83,7 +83,54 @@ input[type=text]:focus{outline:none;border-color:var(--blue)}
 .done{background:var(--green-soft);color:var(--green);border-radius:var(--r);padding:14px;font-weight:600}
 .hide{display:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
-@media (max-width:400px){.q{font-size:46px}.stat b{font-size:22px}}
+
+/* --- Responsywnosc: gra ma zmiescic sie na ekranie (telefon/tablet, pion i poziom) --- */
+.play-main{min-width:0}
+/* Plynne skalowanie wg mniejszego wymiaru ekranu / wysokosci */
+.q{font-size:clamp(34px,8vmin,56px)}
+input[type=text]{height:clamp(46px,7vh,56px)}
+.pad button{height:clamp(46px,7.2vh,60px);font-size:clamp(20px,4.6vh,26px)}
+.pad .del{font-size:clamp(18px,4.2vh,24px)}
+.pad .go{font-size:clamp(16px,3.4vh,20px)}
+
+/* Waski telefon w pionie (stojak): mniej marginesow, wszystko wyzej */
+@media (max-width:430px){
+  .wrap{padding:14px 12px 22px}
+  .card{padding:14px}
+  #game .stats{margin-bottom:10px}
+  #game .bar{margin-bottom:14px}
+  .stat b{font-size:22px}
+}
+
+/* Niski ekran (nizsze telefony w pionie, okna): scisnij pionowe odstepy */
+@media (max-height:760px){
+  .wrap{padding-top:10px;padding-bottom:6px}
+  #game .stats{margin-bottom:8px}
+  #game .bar{margin-bottom:10px}
+  #game .card{padding:14px}
+  #game .q{margin:2px 0 2px}
+  #game .fb{min-height:20px;margin-bottom:8px}
+  #game .pad{gap:8px}
+  #game .pad button{height:clamp(44px,6.4vh,58px)}
+  #game #quit{margin-top:8px}
+}
+
+/* Poziom z mala wysokoscia (telefon/tablet na lezaka): pytanie obok klawiatury */
+@media (orientation:landscape) and (max-height:560px){
+  .wrap{max-width:780px;padding:10px 14px}
+  h1,.sub{display:none}
+  #game .stats{gap:8px;margin-bottom:8px}
+  #game .stat{padding:4px 8px}
+  #game .stat b{font-size:18px;line-height:1.1}
+  #game .stat span{font-size:11px}
+  #game .bar{margin-bottom:10px}
+  #game .card{display:flex;flex-direction:row;align-items:center;gap:18px;padding:14px}
+  #game .play-main{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center}
+  #game .q{margin:0 0 6px}
+  #game .fb{min-height:22px;margin-bottom:8px}
+  #game .pad{flex:0 0 auto;margin:0;max-width:260px}
+  #game #quit{margin-top:8px}
+}
 </style>
 </head>
 <body>
@@ -123,12 +170,14 @@ input[type=text]:focus{outline:none;border-color:var(--blue)}
   </div>
   <div class="bar"><div id="tbar"></div></div>
   <div class="card">
-    <p class="q" id="question">6 : 3</p>
-    <p class="fb" id="feedback"></p>
-    <div class="ans">
-      <input type="text" id="answer" inputmode="none" readonly autocomplete="off" aria-label="Odpowiedź">
+    <div class="play-main">
+      <p class="q" id="question">6 : 3</p>
+      <p class="fb" id="feedback"></p>
+      <div class="ans">
+        <input type="text" id="answer" inputmode="none" readonly autocomplete="off" aria-label="Odpowiedź">
+      </div>
+      <p class="err" id="err"></p>
     </div>
-    <p class="err" id="err"></p>
     <div class="pad" id="pad">
       <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button>
       <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
