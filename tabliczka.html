@@ -105,7 +105,10 @@ input[type=text]:focus{outline:none;border-color:var(--blue)}
 
   <div class="slider"><label for="maxn">Drugi czynnik do</label><input type="range" id="maxn" min="5" max="20" step="1" value="10"><span class="out" id="maxout">10</span></div>
   <div class="slider"><label for="qcount">Liczba pytań</label><input type="range" id="qcount" min="10" max="60" step="5" value="20"><span class="out" id="qcout">20</span></div>
-  <div class="slider"><label for="tlimit">Czas na pytanie</label><input type="range" id="tlimit" min="0" max="20" step="1" value="10"><span class="out" id="tlout">10 s</span></div>
+  <div class="row" style="margin-bottom:14px">
+    <button class="chip grow" id="ttoggle" aria-pressed="true">Na czas</button>
+  </div>
+  <div class="slider" id="tlimitrow"><label for="tlimit">Czas na pytanie</label><input type="range" id="tlimit" min="1" max="20" step="1" value="10"><span class="out" id="tlout">10 s</span></div>
 
   <p class="err" id="serr"></p>
   <button class="big" id="start">Start</button>
@@ -187,7 +190,13 @@ document.querySelectorAll('.mode').forEach(function(b){
 function bind(s,o,f){var el=$(s);el.addEventListener('input',function(){$(o).textContent=f(el.value)})}
 bind('maxn','maxout',function(v){return v});
 bind('qcount','qcout',function(v){return v});
-bind('tlimit','tlout',function(v){return v==='0'?'bez limitu':v+' s'});
+bind('tlimit','tlout',function(v){return v+' s'});
+$('ttoggle').addEventListener('click',function(){
+  var on=$('ttoggle').getAttribute('aria-pressed')!=='true';
+  $('ttoggle').setAttribute('aria-pressed',on?'true':'false');
+  $('ttoggle').textContent=on?'Na czas':'Bez czasu';
+  $('tlimitrow').classList.toggle('hide',!on);
+});
 
 function make(){
   var t=S.tabs[Math.floor(Math.random()*S.tabs.length)];
@@ -287,7 +296,8 @@ function reset(hard){
 $('start').addEventListener('click',function(){
   var t=[];document.querySelectorAll('#tables button').forEach(function(b){if(b.getAttribute('aria-pressed')==='true')t.push(Number(b.dataset.t))});
   if(!t.length){$('serr').textContent='Wybierz co najmniej jedną tabliczkę';return}
-  S.tabs=t;S.max=Number($('maxn').value);S.count=Number($('qcount').value);S.limit=Number($('tlimit').value);
+  S.tabs=t;S.max=Number($('maxn').value);S.count=Number($('qcount').value);
+  S.limit=$('ttoggle').getAttribute('aria-pressed')==='true'?Number($('tlimit').value):0;
   reset(false);
 });
 function press(k){
