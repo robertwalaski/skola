@@ -160,7 +160,7 @@ input[type=text]:focus{outline:none;border-color:var(--blue)}
 <script>
 (function(){
 var $=function(i){return document.getElementById(i)};
-var S={tabs:[2,3],mode:'mix',max:10,count:20,limit:10,i:0,score:0,streak:0,queue:[],cur:null,t0:0,timer:null,left:0,times:[],wrong:{},hardOnly:null};
+var S={tabs:[2,3],mode:'mix',max:10,count:20,limit:10,i:0,score:0,streak:0,queue:[],cur:null,t0:0,timer:null,left:0,times:[],wrong:{},hardOnly:null,recent:[],last:null,recentMax:0};
 var STORE='tabliczka.v1';
 var mem={best:0,wrong:{}};
 try{var raw=localStorage.getItem(STORE);if(raw)mem=JSON.parse(raw)}catch(e){}
@@ -198,16 +198,33 @@ $('ttoggle').addEventListener('click',function(){
   $('tlimitrow').classList.toggle('hide',!on);
 });
 
-function make(){
+function build(){
   var t=S.tabs[Math.floor(Math.random()*S.tabs.length)];
   var o=1+Math.floor(Math.random()*S.max);
   var op=S.mode==='mix'?(Math.random()<0.5?'mul':'div'):S.mode;
   if(op==='mul')return Math.random()<0.5?{op:'mul',x:t,y:o}:{op:'mul',x:o,y:t};
   return {op:'div',x:t*o,y:t};
 }
+// Losuj nowe pytanie unikajac ostatnio zadanych (S.recent). Przy malej liczbie
+// kombinacji nie da sie uniknac powtorzen - wtedy oddajemy ostatniego kandydata.
+function make(){
+  var best=null;
+  for(var i=0;i<16;i++){
+    var c=build();best=c;
+    if(S.recent.indexOf(key(c))===-1)return c;
+  }
+  return best;
+}
 function pick(){
-  if(S.hardOnly&&S.hardOnly.length)return S.hardOnly[Math.floor(Math.random()*S.hardOnly.length)];
-  if(S.queue.length&&Math.random()<0.45)return S.queue.splice(Math.floor(Math.random()*S.queue.length),1)[0];
+  if(S.hardOnly&&S.hardOnly.length){
+    var h;for(var i=0;i<8;i++){h=S.hardOnly[Math.floor(Math.random()*S.hardOnly.length)];if(key(h)!==S.last)break}
+    return h;
+  }
+  if(S.queue.length&&Math.random()<0.45){
+    var idx=Math.floor(Math.random()*S.queue.length);
+    if(S.queue.length>1&&key(S.queue[idx])===S.last)idx=(idx+1)%S.queue.length;
+    return S.queue.splice(idx,1)[0];
+  }
   return make();
 }
 function txt(c){return c.x+(c.op==='mul'?' \u00D7 ':' : ')+c.y}
@@ -220,6 +237,8 @@ function next(){
   stop();
   if(S.i>=S.count)return finish();
   S.cur=pick();S.i++;
+  var _k=key(S.cur);S.last=_k;S.recent.push(_k);
+  while(S.recent.length>S.recentMax)S.recent.shift();
   $('question').textContent=txt(S.cur);
   $('prog').textContent=S.i+'/'+S.count;
   $('answer').value='';$('err').textContent='';$('feedback').textContent='';
@@ -281,7 +300,11 @@ function finish(){
   }
 }
 function reset(hard){
-  S.i=0;S.score=0;S.streak=0;S.queue=[];S.times=[];
+  S.i=0;S.score=0;S.streak=0;S.queue=[];S.times=[];S.recent=[];S.last=null;
+  // Okno unikania powtorzen - mniejsze niz liczba mozliwych kombinacji, inaczej
+  // make() nie mialoby czego zwrocic (perOp: mul ma 2 uklady, div 1, mix 3).
+  var perOp=S.mode==='mix'?3:(S.mode==='mul'?2:1);
+  S.recentMax=Math.max(0,Math.min(8,S.tabs.length*S.max*perOp-2));
   if(hard){
     var src=Object.keys(S.wrong).length?S.wrong:mem.wrong;
     var ks=Object.keys(src).sort(function(a,b){return src[b]-src[a]}).slice(0,10);
