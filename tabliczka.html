@@ -117,18 +117,23 @@ input[type=text]{height:clamp(46px,7vh,56px)}
 
 /* Poziom z mala wysokoscia (telefon/tablet na lezaka): pytanie obok klawiatury */
 @media (orientation:landscape) and (max-height:560px){
-  .wrap{max-width:780px;padding:10px 14px}
+  .wrap{max-width:780px;padding:8px 14px 4px}
   h1,.sub{display:none}
   #game .stats{gap:8px;margin-bottom:8px}
   #game .stat{padding:4px 8px}
   #game .stat b{font-size:18px;line-height:1.1}
   #game .stat span{font-size:11px}
   #game .bar{margin-bottom:10px}
-  #game .card{display:flex;flex-direction:row;align-items:center;gap:18px;padding:14px}
-  #game .play-main{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center}
-  #game .q{margin:0 0 6px}
+  #game .card{display:flex;flex-direction:row;align-items:center;gap:16px;padding:12px}
+  #game .play-main{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center}
+  #game .q{margin:0 0 6px;font-size:clamp(30px,9vh,52px)}
   #game .fb{min-height:22px;margin-bottom:8px}
-  #game .pad{flex:0 0 auto;margin:0;max-width:260px}
+  /* Pad w flex-row musi miec jawna szerokosc, inaczej grid 1fr zapada do min-content.
+     4 rzedy przyciskow musza zmiescic sie w niskim ekranie - wysokosc z vh. */
+  #game .pad{flex:0 0 auto;width:min(46%,300px);max-width:none;margin:0;gap:7px}
+  #game .pad button{height:clamp(38px,12vh,44px);font-size:clamp(18px,4.4vh,24px)}
+  #game .pad .del{font-size:clamp(16px,3.8vh,22px)}
+  #game .pad .go{font-size:clamp(15px,3.2vh,20px)}
   #game #quit{margin-top:8px}
 }
 </style>
