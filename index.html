@@ -27,6 +27,8 @@ body{
 header{text-align:center;margin-bottom:32px}
 h1{font-size:30px;font-weight:700;margin:0 0 6px}
 .sub{color:var(--ink-soft);font-size:16px;margin:0}
+h2.section{font-size:15px;font-weight:700;letter-spacing:.06em;color:var(--ink-soft);text-transform:uppercase;margin:32px 0 12px}
+h2.section:first-of-type{margin-top:0}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
 .app{
   display:flex;flex-direction:column;gap:8px;
@@ -52,11 +54,21 @@ footer{text-align:center;color:var(--ink-soft);font-size:13px;margin-top:36px}
     <p class="sub">Aplikacje do nauki</p>
   </header>
 
+  <h2 class="section">Matematyka</h2>
   <div class="grid">
     <a class="app" href="tabliczka.html">
       <span class="ico">✖️</span>
       <h2>Tabliczka mnożenia</h2>
       <p>Mnożenie i dzielenie na czas, z klawiaturą numeryczną.</p>
+    </a>
+  </div>
+
+  <h2 class="section">English</h2>
+  <div class="grid">
+    <a class="app" href="alfabet.html">
+      <span class="ico">🔤</span>
+      <h2>Angielski alfabet</h2>
+      <p>Fiszki, brakująca literka i quiz ze słuchu — nauka liter A-Z.</p>
     </a>
 
     <div class="app soon">
