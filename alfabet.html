@@ -252,8 +252,31 @@ function isUnlocked(i){ return i===0 || !!progress[i-1]; }
 
 // ---------- speech ----------
 var voicesReady = false;
+var bestVoice = null;
+var PREFERRED_VOICES = [
+  'Google US English',
+  'Samantha',
+  'Microsoft Aria Online (Natural) - English (United States)',
+  'Microsoft Jenny Online (Natural) - English (United States)'
+];
+function pickBestVoice(){
+  var voices = window.speechSynthesis.getVoices();
+  if(!voices.length) return null;
+  for(var i=0;i<PREFERRED_VOICES.length;i++){
+    var v = voices.find(function(v){ return v.name === PREFERRED_VOICES[i]; });
+    if(v) return v;
+  }
+  var enUS = voices.find(function(v){ return v.lang === 'en-US'; });
+  if(enUS) return enUS;
+  var en = voices.find(function(v){ return v.lang && v.lang.indexOf('en') === 0; });
+  return en || voices[0];
+}
 if('speechSynthesis' in window){
-  window.speechSynthesis.onvoiceschanged = function(){ voicesReady = true; };
+  window.speechSynthesis.onvoiceschanged = function(){
+    voicesReady = true;
+    bestVoice = pickBestVoice();
+  };
+  bestVoice = pickBestVoice();
 }
 function speak(text){
   if(!('speechSynthesis' in window)){
@@ -265,8 +288,26 @@ function speak(text){
     var u = new SpeechSynthesisUtterance(text);
     u.lang = 'en-US';
     u.rate = 0.85;
+    if(bestVoice) u.voice = bestVoice;
     window.speechSynthesis.speak(u);
   }catch(e){}
+}
+function speakSequence(texts, onDone){
+  if(!('speechSynthesis' in window)){ if(onDone) onDone(); return; }
+  try{
+    window.speechSynthesis.cancel();
+    texts.forEach(function(text, i){
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US';
+      u.rate = 0.85;
+      if(bestVoice) u.voice = bestVoice;
+      if(onDone && i===texts.length-1){
+        u.onend = onDone;
+        u.onerror = onDone;
+      }
+      window.speechSynthesis.speak(u);
+    });
+  }catch(e){ if(onDone) onDone(); }
 }
 if(!('speechSynthesis' in window)){
   document.getElementById('voicewarn').textContent = 'Ta przeglądarka nie obsługuje odczytu głosowego.';
@@ -429,7 +470,7 @@ function renderFlash(){
 }
 document.getElementById('flListen').addEventListener('click', function(){
   var item = ALPHABET[round.items[round.idx]];
-  speak(item.letter + '. ' + item.word + '.');
+  speakSequence([item.letter, item.word]);
 });
 document.getElementById('flPrev').addEventListener('click', function(){
   if(round.idx>0){ round.idx--; renderFlash(); }
@@ -445,6 +486,8 @@ document.getElementById('flNext').addEventListener('click', function(){
 });
 
 // ---------- MISSING LETTER ----------
+var missSeqLetters = [];
+var missBlankEl = null;
 function renderMissing(){
   document.getElementById('missFb').textContent = '';
   document.getElementById('missFb').className = 'fb';
@@ -457,10 +500,13 @@ function renderMissing(){
   if(targetIdx===0) seq = [{blank:true}, {letter:ALPHABET[1].letter}, {letter:ALPHABET[2].letter}];
   else if(targetIdx===25) seq = [{letter:ALPHABET[23].letter}, {letter:ALPHABET[24].letter}, {blank:true}];
   else seq = [{letter:ALPHABET[targetIdx-1].letter}, {blank:true}, {letter:ALPHABET[targetIdx+1].letter}];
+  missSeqLetters = seq.map(function(s){ return s.blank ? target.letter : s.letter; });
+  missBlankEl = null;
   seq.forEach(function(s){
     var d = document.createElement('div');
     d.className = 'seqbox'+(s.blank ? ' blank':'');
     d.textContent = s.blank ? '?' : s.letter;
+    if(s.blank) missBlankEl = d;
     seqEl.appendChild(d);
   });
 
@@ -491,6 +537,18 @@ function handleMissingAnswer(correct, btnEl){
     btnEl.classList.add('correct');
     fb.textContent = 'Świetnie! 🎉';
     fb.className = 'fb ok';
+    if(missBlankEl){
+      missBlankEl.textContent = ALPHABET[round.items[round.idx]].letter;
+      missBlankEl.classList.remove('blank');
+    }
+    updateStats();
+    speakSequence(missSeqLetters, function(){
+      setTimeout(function(){
+        round.locked = false;
+        advance();
+      }, 500);
+    });
+    return;
   }else{
     round.streak = 0;
     btnEl.classList.add('wrong');
@@ -528,8 +586,14 @@ function renderListen(){
   });
   updateStats();
 }
+var listenPlayToken = 0;
 function playListenAudio(target){
-  speak(target.word);
+  var token = ++listenPlayToken;
+  speak(target.letter);
+  setTimeout(function(){
+    if(token !== listenPlayToken) return;
+    speak(target.word);
+  }, 3000);
 }
 document.getElementById('listenReplay').addEventListener('click', function(){
   var targetIdx = round.items[round.idx];
