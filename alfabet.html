@@ -229,26 +229,35 @@ var BATCHES = [
   {name:'A-G', from:0,  to:7},
   {name:'H-N', from:7,  to:14},
   {name:'O-T', from:14, to:20},
-  {name:'U-Z', from:20, to:26}
+  {name:'U-Z', from:20, to:26},
+  {name:'Cały alfabet (A-Z)', from:0, to:26}
 ];
 
-var PROGRESS_KEY = 'abc_alfabet_progress_v1';
+var PROGRESS_KEY = 'abc_alfabet_progress_v2';
+var MODES = ['flash','missing','listen'];
 
+function emptyProgress(){
+  return BATCHES.map(function(){ return {flash:false, missing:false, listen:false}; });
+}
 function loadProgress(){
   try{
     var raw = localStorage.getItem(PROGRESS_KEY);
-    if(!raw) return [false,false,false,false];
+    if(!raw) return emptyProgress();
     var arr = JSON.parse(raw);
-    if(!Array.isArray(arr) || arr.length!==4) return [false,false,false,false];
-    return arr;
-  }catch(e){ return [false,false,false,false]; }
+    if(!Array.isArray(arr) || arr.length!==BATCHES.length) return emptyProgress();
+    return arr.map(function(p){
+      return {flash:!!(p&&p.flash), missing:!!(p&&p.missing), listen:!!(p&&p.listen)};
+    });
+  }catch(e){ return emptyProgress(); }
 }
 function saveProgress(arr){
   try{ localStorage.setItem(PROGRESS_KEY, JSON.stringify(arr)); }catch(e){}
 }
 var progress = loadProgress();
 
-function isUnlocked(i){ return i===0 || !!progress[i-1]; }
+function modesDone(i){ var p=progress[i]; return MODES.filter(function(m){ return p[m]; }).length; }
+function batchDone(i){ return modesDone(i)===MODES.length; }
+function isUnlocked(i){ return i===0 || batchDone(i-1); }
 
 // ---------- speech ----------
 var voicesReady = false;
@@ -330,9 +339,13 @@ function renderBatches(){
       btn.classList.add('locked');
       btn.disabled = true;
     }
-    var doneMark = progress[i] ? ' <span class="done-mark">✓</span>' : '';
+    var doneMark = batchDone(i) ? ' <span class="done-mark">✓</span>' : '';
     var lockMark = !unlocked ? ' 🔒' : '';
-    btn.innerHTML = '<b>'+b.name+doneMark+'</b><span>'+(unlocked ? (b.to-b.from)+' liter'+lockMark : 'zablokowane')+'</span>';
+    var subtitle;
+    if(!unlocked) subtitle = 'zablokowane';
+    else if(batchDone(i)) subtitle = (b.to-b.from)+' liter';
+    else subtitle = modesDone(i)+'/'+MODES.length+' trybów';
+    btn.innerHTML = '<b>'+b.name+doneMark+'</b><span>'+subtitle+lockMark+'</span>';
     btn.addEventListener('click', function(){
       selectedBatch = i;
       renderBatches();
@@ -358,7 +371,7 @@ function updateStart(){
 
 document.getElementById('resetProgress').addEventListener('click', function(e){
   e.preventDefault();
-  progress = [false,false,false,false];
+  progress = emptyProgress();
   saveProgress(progress);
   selectedBatch = null;
   renderBatches();
@@ -435,7 +448,7 @@ function startRound(batchIndex, mode){
   for(var i=b.from;i<b.to;i++) indices.push(i);
   round.mode = mode;
   round.batchIndex = batchIndex;
-  round.items = shuffle(indices);
+  round.items = (mode==='flash') ? indices : shuffle(indices);
   round.idx = 0;
   round.score = 0;
   round.streak = 0;
@@ -468,9 +481,15 @@ function renderFlash(){
   var nextBtn = document.getElementById('flNext');
   nextBtn.textContent = (round.idx===round.items.length-1) ? 'Zakończ ✓' : 'Dalej →';
 }
+var flListenToken = 0;
 document.getElementById('flListen').addEventListener('click', function(){
   var item = ALPHABET[round.items[round.idx]];
-  speakSequence([item.letter, item.word]);
+  var token = ++flListenToken;
+  speak(item.letter);
+  setTimeout(function(){
+    if(token !== flListenToken) return;
+    speak(item.word);
+  }, 10000);
 });
 document.getElementById('flPrev').addEventListener('click', function(){
   if(round.idx>0){ round.idx--; renderFlash(); }
@@ -593,7 +612,7 @@ function playListenAudio(target){
   setTimeout(function(){
     if(token !== listenPlayToken) return;
     speak(target.word);
-  }, 3000);
+  }, 10000);
 }
 document.getElementById('listenReplay').addEventListener('click', function(){
   var targetIdx = round.items[round.idx];
@@ -638,13 +657,13 @@ function finishRound(){
   var total = round.items.length;
   document.getElementById('doneScore').textContent = round.score+'/'+total;
   var unlockMsg = '';
-  // any completed round (flash counts as full score) unlocks the next batch
-  if(!progress[round.batchIndex]){
-    progress[round.batchIndex] = true;
+  var wasDone = batchDone(round.batchIndex);
+  if(!progress[round.batchIndex][round.mode]){
+    progress[round.batchIndex][round.mode] = true;
     saveProgress(progress);
-    if(round.batchIndex < BATCHES.length-1 && !progress[round.batchIndex+1]){
-      unlockMsg = 'Odblokowano nowy zestaw liter: ' + BATCHES[round.batchIndex+1].name + '!';
-    }
+  }
+  if(!wasDone && batchDone(round.batchIndex) && round.batchIndex < BATCHES.length-1){
+    unlockMsg = 'Odblokowano nowy zestaw liter: ' + BATCHES[round.batchIndex+1].name + '!';
   }
   document.getElementById('doneUnlock').textContent = unlockMsg;
   progEl.textContent = total+'/'+total;
