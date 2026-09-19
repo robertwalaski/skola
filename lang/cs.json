@@ -1,0 +1,18 @@
+{
+    "app.name": "Škola",
+    "home.title": "Škola",
+    "home.subtitle": "Hry a cvičení k učení",
+    "home.section.kids": "Pro děti",
+    "home.section.adults": "Pro dospělé",
+    "home.coming_soon": "Brzy",
+    "course.multiplication.title": "Násobilka",
+    "course.multiplication.desc": "Trénink násobení a dělení",
+    "course.alphabet.title": "Anglická abeceda",
+    "course.alphabet.desc": "Kartičky, chybějící písmenko, poslechový kvíz",
+    "course.irregular_verbs.title": "Nepravidelná slovesa",
+    "course.irregular_verbs.desc": "Kartičky a cvičení tvarů sloves",
+    "course.conditionals.title": "Conditionals",
+    "course.conditionals.desc": "Podmínkové věty 0/1/2/3",
+    "course.wishes.title": "Wishes",
+    "course.wishes.desc": "Wish, if only, would"
+}

@@ -2,17 +2,11 @@
 import { Link, usePage } from '@inertiajs/vue3';
 import AppLayout from '../Layouts/AppLayout.vue';
 import CourseTile from '../Components/CourseTile.vue';
+import LanguageSwitcher from '../Components/LanguageSwitcher.vue';
 import { useTrans } from '../composables/useTrans';
 
 const { t } = useTrans();
 const page = usePage();
-
-const languages = [
-    { code: 'pl', label: 'PL', enabled: true },
-    { code: 'cs', label: 'CS', enabled: false },
-    { code: 'sk', label: 'SK', enabled: false },
-    { code: 'de', label: 'DE', enabled: false },
-];
 </script>
 
 <template>
@@ -21,17 +15,8 @@ const languages = [
             <h1 class="text-3xl font-bold">{{ t('home.title') }}</h1>
             <p class="mt-1 text-ink-soft">{{ t('home.subtitle') }}</p>
 
-            <div class="mt-4 flex justify-center gap-2">
-                <span
-                    v-for="lang in languages"
-                    :key="lang.code"
-                    class="rounded-full px-3 py-1 text-xs font-medium"
-                    :class="lang.enabled
-                        ? 'bg-blue text-white'
-                        : 'bg-blue-soft text-ink-soft opacity-60'"
-                >
-                    {{ lang.label }}
-                </span>
+            <div class="mt-4 flex justify-center">
+                <LanguageSwitcher />
             </div>
         </template>
 

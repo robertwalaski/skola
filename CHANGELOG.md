@@ -7,6 +7,18 @@ projekt stosuje [Semantic Versioning](https://semver.org/lang/pl/).
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-09-19
+
+### Added
+- Działający przełącznik języka (PL/CS/SK/DE) - zapamiętywany w sesji dla gościa, na koncie dla zalogowanego ucznia.
+- Pełne tłumaczenie interfejsu strony głównej i nawigacji (`lang/{cs,sk,de}.json`).
+- Tłumaczenie treści dydaktycznej: znaczenia 86 czasowników nieregularnych oraz teoria/tytuły sekcji Conditionals i Wishes w 4 językach.
+- Testy: kompletność kluczy tłumaczeń UI, obecność wszystkich języków w treści, pełny przepływ przełączania języka.
+
+### Known limitation
+- Tłumaczenia cs/sk/de są maszynowe (Claude), nie zweryfikowane jeszcze przez native speakera.
+- Elementy interfejsu wewnątrz gier (przyciski, komunikaty) pozostają na razie tylko po polsku - przełącznik działa w pełni dla strony głównej i treści dydaktycznej.
+
 ## [0.5.0] - 2026-09-19
 
 ### Added

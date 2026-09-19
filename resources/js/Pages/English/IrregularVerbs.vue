@@ -1,5 +1,6 @@
 <script setup>
 import { computed, reactive, ref } from 'vue';
+import { usePage } from '@inertiajs/vue3';
 import AppLayout from '../../Layouts/AppLayout.vue';
 import data from '../../../content/english/irregular-verbs.json';
 import { useSpeech } from '../../composables/useSpeech.js';
@@ -11,6 +12,13 @@ const MODE_LABELS = { flash: 'Fiszki', gap: 'Uzupełnij formę', listen: 'Quiz z
 
 const { speakSequence, warning } = useSpeech();
 const { record } = useAttempts();
+const page = usePage();
+
+// Content translations (word meanings) are per-verb, not run through the UI
+// `t()` helper - fall back to Polish if the learner's language is missing.
+function meaningOf(verb) {
+    return verb.meaning[page.props.locale] || verb.meaning.pl;
+}
 
 function shuffle(arr) {
     const a = arr.slice();
@@ -272,7 +280,7 @@ function handleListenAnswer(oi) {
                     </div>
                     <div v-else class="mt-4.5 rounded-app bg-paper p-4">
                         <p class="text-2xl font-semibold">{{ flashCurrent.past }} <span class="text-ink-soft">/</span> {{ flashCurrent.participle }}</p>
-                        <p class="mt-1 text-ink-soft">{{ flashCurrent.meaning.pl }}</p>
+                        <p class="mt-1 text-ink-soft">{{ meaningOf(flashCurrent) }}</p>
                     </div>
                     <div class="mt-4.5 flex gap-2.5">
                         <button type="button" class="h-11 flex-1 rounded-[10px] border border-line bg-card disabled:cursor-not-allowed disabled:opacity-50" :disabled="flIsFirst" @click="flPrev">
@@ -287,7 +295,7 @@ function handleListenAnswer(oi) {
                 <!-- GAP FILL MODE -->
                 <div v-else-if="gameArea === 'gap'" class="text-center">
                     <p class="mb-1 text-4xl font-bold">{{ gap.target.base }}</p>
-                    <p class="mb-4 text-sm text-ink-soft">{{ gap.target.meaning.pl }}</p>
+                    <p class="mb-4 text-sm text-ink-soft">{{ meaningOf(gap.target) }}</p>
                     <div class="mb-2 flex justify-center gap-3">
                         <div class="text-left">
                             <label class="mb-1 block text-xs text-ink-soft">Past Simple</label>

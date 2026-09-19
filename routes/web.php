@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GroupMembershipController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\RankingController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,6 +21,7 @@ Route::get('/angielski/wishes', fn () => Inertia::render('English/Wishes'))->nam
 
 Route::get('/prywatnosc', fn () => Inertia::render('Legal/PrivacyPolicy'))->name('privacy');
 Route::get('/ranking', [RankingController::class, 'index'])->name('ranking');
+Route::post('/jezyk', [LocaleController::class, 'update'])->name('locale.update');
 
 Route::middleware('guest')->group(function () {
     Route::get('/rejestracja', [AuthController::class, 'create'])->name('register');

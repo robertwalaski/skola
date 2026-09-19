@@ -1,0 +1,18 @@
+{
+    "app.name": "Schule",
+    "home.title": "Schule",
+    "home.subtitle": "Spiele und Übungen zum Lernen",
+    "home.section.kids": "Für Kinder",
+    "home.section.adults": "Für Erwachsene",
+    "home.coming_soon": "Bald",
+    "course.multiplication.title": "Einmaleins",
+    "course.multiplication.desc": "Training für Multiplikation und Division",
+    "course.alphabet.title": "Englisches Alphabet",
+    "course.alphabet.desc": "Karteikarten, fehlender Buchstabe, Hörquiz",
+    "course.irregular_verbs.title": "Unregelmäßige Verben",
+    "course.irregular_verbs.desc": "Karteikarten und Übungen zu Verbformen",
+    "course.conditionals.title": "Conditionals",
+    "course.conditionals.desc": "Bedingungssätze 0/1/2/3",
+    "course.wishes.title": "Wishes",
+    "course.wishes.desc": "Wish, if only, would"
+}

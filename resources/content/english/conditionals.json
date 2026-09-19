@@ -1,11 +1,26 @@
 {
     "title": "Conditionals",
-    "subtitle": "Tryby warunkowe: zero, pierwszy, drugi, trzeci i mieszane.",
+    "subtitle": {
+        "pl": "Tryby warunkowe: zero, pierwszy, drugi, trzeci i mieszane.",
+        "cs": "Podmínkové věty: nultá, první, druhá, třetí a smíšené.",
+        "sk": "Podmienkové vety: nultá, prvá, druhá, tretia a zmiešané.",
+        "de": "Bedingungssätze: null, eins, zwei, drei und gemischt."
+    },
     "sections": [
         {
             "id": "zero",
-            "title": "Conditional 0 - fakty, prawa natury",
-            "theory": "If + Present Simple, Present Simple. Używamy do ogólnych prawd, praw natury i rzeczy, które zawsze się sprawdzają.",
+            "title": {
+                "pl": "Conditional 0 - fakty, prawa natury",
+                "cs": "Conditional 0 - fakta, přírodní zákony",
+                "sk": "Conditional 0 - fakty, prírodné zákony",
+                "de": "Conditional 0 - Fakten, Naturgesetze"
+            },
+            "theory": {
+                "pl": "If + Present Simple, Present Simple. Używamy do ogólnych prawd, praw natury i rzeczy, które zawsze się sprawdzają.",
+                "cs": "If + přítomný čas prostý, přítomný čas prostý. Používáme pro obecné pravdy, přírodní zákony a věci, které platí vždy.",
+                "sk": "If + prítomný čas jednoduchý, prítomný čas jednoduchý. Používame pre všeobecné pravdy, prírodné zákony a veci, ktoré platia vždy.",
+                "de": "If + Simple Present, Simple Present. Wir verwenden es für allgemeine Wahrheiten, Naturgesetze und Dinge, die immer zutreffen."
+            },
             "exercises": [
                 { "id": "zero-1", "type": "choice", "prompt": "If you heat water to 100°C, it ___.", "options": ["boil", "boils", "boiled"], "answer": "boils" },
                 { "id": "zero-2", "type": "gap", "prompt": "If ice ___ (get) warm, it melts.", "accepted": ["gets"] },
@@ -17,8 +32,18 @@
         },
         {
             "id": "first",
-            "title": "Conditional 1 - realna przyszłość",
-            "theory": "If + Present Simple, will + bezokolicznik. Mówimy o realnych, możliwych sytuacjach w przyszłości.",
+            "title": {
+                "pl": "Conditional 1 - realna przyszłość",
+                "cs": "Conditional 1 - reálná budoucnost",
+                "sk": "Conditional 1 - reálna budúcnosť",
+                "de": "Conditional 1 - reale Zukunft"
+            },
+            "theory": {
+                "pl": "If + Present Simple, will + bezokolicznik. Mówimy o realnych, możliwych sytuacjach w przyszłości.",
+                "cs": "If + přítomný čas prostý, will + infinitiv. Mluvíme o reálných, možných situacích v budoucnosti.",
+                "sk": "If + prítomný čas jednoduchý, will + infinitív. Hovoríme o reálnych, možných situáciách v budúcnosti.",
+                "de": "If + Simple Present, will + Infinitiv. Wir sprechen über reale, mögliche Situationen in der Zukunft."
+            },
             "exercises": [
                 { "id": "first-1", "type": "choice", "prompt": "If it rains tomorrow, we ___ stay at home.", "options": ["will", "would", "are"], "answer": "will" },
                 { "id": "first-2", "type": "gap", "prompt": "If you ___ (study), you will pass the exam.", "accepted": ["study"] },
@@ -30,8 +55,18 @@
         },
         {
             "id": "second",
-            "title": "Conditional 2 - nierealna teraźniejszość/przyszłość",
-            "theory": "If + Past Simple, would + bezokolicznik. Sytuacje nierealne, hipotetyczne, marzenia. Po 'if I/he/she' poprawną formą jest 'were' (If I were you...).",
+            "title": {
+                "pl": "Conditional 2 - nierealna teraźniejszość/przyszłość",
+                "cs": "Conditional 2 - nereálná přítomnost/budoucnost",
+                "sk": "Conditional 2 - nereálna prítomnosť/budúcnosť",
+                "de": "Conditional 2 - irreale Gegenwart/Zukunft"
+            },
+            "theory": {
+                "pl": "If + Past Simple, would + bezokolicznik. Sytuacje nierealne, hipotetyczne, marzenia. Po 'if I/he/she' poprawną formą jest 'were' (If I were you...).",
+                "cs": "If + minulý čas prostý, would + infinitiv. Nereálné, hypotetické situace, sny. Po 'if I/he/she' je správný tvar 'were' (If I were you...).",
+                "sk": "If + minulý čas jednoduchý, would + infinitív. Nereálne, hypotetické situácie, sny. Po 'if I/he/she' je správny tvar 'were' (If I were you...).",
+                "de": "If + Simple Past, would + Infinitiv. Irreale, hypothetische Situationen, Wünsche. Nach 'if I/he/she' ist die korrekte Form 'were' (If I were you...)."
+            },
             "exercises": [
                 { "id": "second-1", "type": "choice", "prompt": "If I ___ rich, I would travel the world.", "options": ["were", "am", "will be"], "answer": "were" },
                 { "id": "second-2", "type": "gap", "prompt": "If you ___ (have) more time, you would learn a new language.", "accepted": ["had"] },
@@ -43,8 +78,18 @@
         },
         {
             "id": "third",
-            "title": "Conditional 3 - nierealna przeszłość",
-            "theory": "If + Past Perfect, would have + III forma czasownika. Żałowanie, sytuacje z przeszłości, które się nie wydarzyły.",
+            "title": {
+                "pl": "Conditional 3 - nierealna przeszłość",
+                "cs": "Conditional 3 - nereálná minulost",
+                "sk": "Conditional 3 - nereálna minulosť",
+                "de": "Conditional 3 - irreale Vergangenheit"
+            },
+            "theory": {
+                "pl": "If + Past Perfect, would have + III forma czasownika. Żałowanie, sytuacje z przeszłości, które się nie wydarzyły.",
+                "cs": "If + předminulý čas (Past Perfect), would have + třetí tvar slovesa. Litování, situace z minulosti, které se nestaly.",
+                "sk": "If + predminulý čas (Past Perfect), would have + tretí tvar slovesa. Ľútosť, situácie z minulosti, ktoré sa nestali.",
+                "de": "If + Past Perfect, would have + Partizip Perfekt. Bedauern, Situationen aus der Vergangenheit, die nicht eingetreten sind."
+            },
             "exercises": [
                 { "id": "third-1", "type": "choice", "prompt": "If I had studied, I ___ passed the exam.", "options": ["would have", "will have", "would"], "answer": "would have" },
                 { "id": "third-2", "type": "gap", "prompt": "If you had told me, I ___ (help) you.", "accepted": ["would have helped"] },
@@ -56,8 +101,18 @@
         },
         {
             "id": "mixed",
-            "title": "Tryby mieszane",
-            "theory": "Łączymy części z różnych okresów warunkowych, gdy czas przyczyny i czas skutku są różne - np. skutek przeszłej decyzji trwający do dziś.",
+            "title": {
+                "pl": "Tryby mieszane",
+                "cs": "Smíšené podmínkové věty",
+                "sk": "Zmiešané podmienkové vety",
+                "de": "Gemischte Bedingungssätze"
+            },
+            "theory": {
+                "pl": "Łączymy części z różnych okresów warunkowych, gdy czas przyczyny i czas skutku są różne - np. skutek przeszłej decyzji trwający do dziś.",
+                "cs": "Kombinujeme části z různých podmínkových vět, když se čas příčiny a čas následku liší - např. následek minulého rozhodnutí trvající dodnes.",
+                "sk": "Kombinujeme časti z rôznych podmienkových viet, keď sa čas príčiny a čas následku líšia - napr. následok minulého rozhodnutia trvajúci dodnes.",
+                "de": "Wir kombinieren Teile verschiedener Bedingungssätze, wenn die Zeit der Ursache und die Zeit der Wirkung unterschiedlich sind - z. B. die bis heute andauernde Folge einer vergangenen Entscheidung."
+            },
             "exercises": [
                 { "id": "mixed-1", "type": "choice", "prompt": "If I had taken that job, I ___ rich now.", "options": ["would be", "would have been", "will be"], "answer": "would be" },
                 { "id": "mixed-2", "type": "gap", "prompt": "If she ___ (study) medicine, she would be a doctor now.", "accepted": ["had studied"] },

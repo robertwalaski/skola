@@ -1,11 +1,26 @@
 {
     "title": "Wishes",
-    "subtitle": "Wish, if only, would - jak mówić o życzeniach i żalu.",
+    "subtitle": {
+        "pl": "Wish, if only, would - jak mówić o życzeniach i żalu.",
+        "cs": "Wish, if only, would - jak mluvit o přáních a lítosti.",
+        "sk": "Wish, if only, would - ako hovoriť o želaniach a ľútosti.",
+        "de": "Wish, if only, would - wie man über Wünsche und Bedauern spricht."
+    },
     "sections": [
         {
             "id": "present",
-            "title": "Wish + Past Simple - życzenia dotyczące teraźniejszości",
-            "theory": "Wish + czasownik w Past Simple, gdy chcemy, żeby coś w teraźniejszości było inne niż jest. Po 'wish I/he/she' zwykle używamy 'were'.",
+            "title": {
+                "pl": "Wish + Past Simple - życzenia dotyczące teraźniejszości",
+                "cs": "Wish + Past Simple - přání týkající se přítomnosti",
+                "sk": "Wish + Past Simple - želania týkajúce sa prítomnosti",
+                "de": "Wish + Simple Past - Wünsche für die Gegenwart"
+            },
+            "theory": {
+                "pl": "Wish + czasownik w Past Simple, gdy chcemy, żeby coś w teraźniejszości było inne niż jest. Po 'wish I/he/she' zwykle używamy 'were'.",
+                "cs": "Wish + sloveso v Past Simple, když chceme, aby něco v přítomnosti bylo jinak, než je. Po 'wish I/he/she' obvykle používáme 'were'.",
+                "sk": "Wish + sloveso v Past Simple, keď chceme, aby niečo v prítomnosti bolo inak, než je. Po 'wish I/he/she' zvyčajne používame 'were'.",
+                "de": "Wish + Verb im Simple Past, wenn wir möchten, dass etwas in der Gegenwart anders wäre, als es ist. Nach 'wish I/he/she' verwenden wir meist 'were'."
+            },
             "exercises": [
                 { "id": "present-1", "type": "gap", "prompt": "I wish I ___ (have) more free time.", "accepted": ["had"] },
                 { "id": "present-2", "type": "choice", "prompt": "She wishes she ___ taller.", "options": ["were", "is", "will be"], "answer": "were" },
@@ -16,8 +31,18 @@
         },
         {
             "id": "past",
-            "title": "Wish + Past Perfect - żal za przeszłość",
-            "theory": "Wish + Past Perfect, gdy żałujemy czegoś, co wydarzyło się (albo nie) w przeszłości.",
+            "title": {
+                "pl": "Wish + Past Perfect - żal za przeszłość",
+                "cs": "Wish + Past Perfect - lítost nad minulostí",
+                "sk": "Wish + Past Perfect - ľútosť nad minulosťou",
+                "de": "Wish + Past Perfect - Bedauern über die Vergangenheit"
+            },
+            "theory": {
+                "pl": "Wish + Past Perfect, gdy żałujemy czegoś, co wydarzyło się (albo nie) w przeszłości.",
+                "cs": "Wish + Past Perfect, když litujeme něčeho, co se (ne)stalo v minulosti.",
+                "sk": "Wish + Past Perfect, keď ľutujeme niečo, čo sa (ne)stalo v minulosti.",
+                "de": "Wish + Past Perfect, wenn wir etwas bedauern, das in der Vergangenheit passiert ist (oder nicht passiert ist)."
+            },
             "exercises": [
                 { "id": "past-1", "type": "gap", "prompt": "I wish I ___ (study) harder for the exam.", "accepted": ["had studied"] },
                 { "id": "past-2", "type": "choice", "prompt": "She wishes she ___ that email.", "options": ["hadn't sent", "didn't send", "wouldn't send"], "answer": "hadn't sent" },
@@ -27,8 +52,18 @@
         },
         {
             "id": "would",
-            "title": "Wish + would / If only - irytacja i mocniejsze życzenia",
-            "theory": "Wish + would odnosi się do irytujących zachowań innych osób lub sytuacji, które chcemy, żeby się zmieniły. 'If only' jest mocniejszym, bardziej emocjonalnym odpowiednikiem 'wish'.",
+            "title": {
+                "pl": "Wish + would / If only - irytacja i mocniejsze życzenia",
+                "cs": "Wish + would / If only - podráždění a silnější přání",
+                "sk": "Wish + would / If only - podráždenie a silnejšie želania",
+                "de": "Wish + would / If only - Verärgerung und stärkere Wünsche"
+            },
+            "theory": {
+                "pl": "Wish + would odnosi się do irytujących zachowań innych osób lub sytuacji, które chcemy, żeby się zmieniły. 'If only' jest mocniejszym, bardziej emocjonalnym odpowiednikiem 'wish'.",
+                "cs": "Wish + would se týká otravného chování jiných lidí nebo situací, které chceme změnit. 'If only' je silnější, emocionálnější obdoba 'wish'.",
+                "sk": "Wish + would sa týka otravného správania iných ľudí alebo situácií, ktoré chceme zmeniť. 'If only' je silnejšia, emocionálnejšia obdoba 'wish'.",
+                "de": "Wish + would bezieht sich auf ärgerliches Verhalten anderer Personen oder Situationen, die wir gern geändert hätten. 'If only' ist ein stärkeres, emotionaleres Äquivalent zu 'wish'."
+            },
             "exercises": [
                 { "id": "would-1", "type": "gap", "prompt": "I wish you ___ (stop) making so much noise.", "accepted": ["would stop"] },
                 { "id": "would-2", "type": "choice", "prompt": "If only it ___ stop raining!", "options": ["would", "will", "could"], "answer": "would" },

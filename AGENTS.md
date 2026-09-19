@@ -37,9 +37,17 @@ Educational games/exercises for kids (math, English alphabet) and adults (Englis
 - `App\Http\Controllers\RankingController` returns **only nick + points**, nothing else about a user - global (top 50) and, if the viewer is in a group, that group's ranking too, both filterable by `?period=week|all` (`withSum` scoped by `created_at >=` start of week).
 - Shared `status` Inertia prop (`HandleInertiaRequests`) carries one-off flash messages (group created + its code, joined a group, PIN reset) - read it as a plain page prop, e.g. `defineProps({ status })`, or via `usePage().props.status`.
 
+## Multilanguage (Etap 6)
+
+- `App\Http\Middleware\SetLocale` (registered before `HandleInertiaRequests` in `bootstrap/app.php`, so it runs first) resolves the request locale: signed-in user's `learner_locale` -> guest session `locale` -> `config('app.locale')` (`pl`). `SetLocale::SUPPORTED` is the single source of truth for the 4 supported codes - `LocaleController`, the language-file test and the content test all read it, don't hardcode the list elsewhere.
+- `POST /jezyk {locale}` (`LocaleController`) sets the session value and, if authenticated, also saves `learner_locale` on the user - so a guest's choice survives their session, a logged-in user's survives forever. `resources/js/Components/LanguageSwitcher.vue` is the PL/CS/SK/DE UI for it, used on `Home.vue`.
+- **Scope actually translated**: the Home page and nav chrome (`lang/{pl,cs,sk,de}.json` via `t()`), and exercise *content* - `irregular-verbs.json` meaning per verb, `conditionals.json`/`wishes.json` theory+section titles (both now `{pl,cs,sk,de}` objects, resolved by `GrammarLesson.vue`'s/`IrregularVerbs.vue`'s `localized()`/`meaningOf()` helpers, falling back to `pl`). English exercise sentences themselves are never translated - that's the language being learned.
+- **Not translated (known, deliberate limitation)**: in-game UI chrome inside `Multiplication.vue`, `Alphabet.vue`, `IrregularVerbs.vue`, `ExerciseCard.vue`, `Ranking.vue`, `Teacher/Dashboard.vue`, the auth pages, etc. is still hardcoded Polish - it was never routed through `t()` when those pages were built in earlier Etaps. Retrofitting it is a large, separate mechanical pass (100+ strings, several needing `t()` to support interpolation, which it doesn't yet) - out of scope for what Etap 6 committed to (`lang/*.json` + content fields), tracked as follow-up rather than silently declared done.
+- cs/sk/de translations (UI strings and content) are machine-translated by Claude, not yet reviewed by a native speaker - flagged in `irregular-verbs.json`'s `"note"` field and here; get them checked before relying on them being idiomatic.
+- Tests: `EnglishContentTest` checks every verb/section has all 4 locales non-empty and every `lang/*.json` has the same keys as `pl.json`; `LocaleTest` covers the switch-and-persist flow end to end.
+
 ## Conventions
 
 - Design tokens (colors, radius) carried over from the legacy static pages live in `resources/css/app.css` under `@theme` (Tailwind v4 generates utilities from them, e.g. `bg-paper`, `text-ink-soft`, `rounded-app`).
-- Only `pl` has translations right now; the language switcher UI shows cs/sk/de as disabled ("wkrótce") until Etap 6.
 - No CI yet in this repo - run Pint + Pest locally before every commit.
 - Feature tests use a real (in-memory sqlite) test DB via `RefreshDatabase` (`tests/Pest.php`) - don't mock the DB.
