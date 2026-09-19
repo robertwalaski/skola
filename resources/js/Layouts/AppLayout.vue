@@ -14,6 +14,7 @@ const page = usePage();
     <div class="min-h-screen bg-paper text-ink">
         <div class="mx-auto max-w-3xl px-4 pb-14 pt-8">
             <div class="mb-2 flex justify-end gap-3 text-sm">
+                <Link href="/ranking" class="text-ink-soft hover:text-ink">Ranking</Link>
                 <template v-if="page.props.auth.user">
                     <span class="text-ink-soft">{{ page.props.auth.user.nick }} - {{ page.props.auth.user.points }} pkt</span>
                     <Link href="/wyloguj" method="post" as="button" class="text-blue">Wyloguj</Link>

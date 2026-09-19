@@ -50,6 +50,7 @@ class HandleInertiaRequests extends Middleware
                     'points' => $user->attempts()->sum('points'),
                 ] : null,
             ],
+            'status' => fn () => $request->session()->get('status'),
         ];
     }
 }

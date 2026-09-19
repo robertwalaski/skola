@@ -1,9 +1,11 @@
 <script setup>
+import { Link, usePage } from '@inertiajs/vue3';
 import AppLayout from '../Layouts/AppLayout.vue';
 import CourseTile from '../Components/CourseTile.vue';
 import { useTrans } from '../composables/useTrans';
 
 const { t } = useTrans();
+const page = usePage();
 
 const languages = [
     { code: 'pl', label: 'PL', enabled: true },
@@ -74,5 +76,11 @@ const languages = [
                 />
             </div>
         </section>
+
+        <p v-if="page.props.auth.user" class="mt-10 text-center text-sm text-ink-soft">
+            <Link href="/dolacz" class="underline">Dołącz do klasy</Link>
+            ·
+            <Link href="/nauczyciel" class="underline">Panel nauczyciela</Link>
+        </p>
     </AppLayout>
 </template>

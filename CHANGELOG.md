@@ -7,6 +7,14 @@ projekt stosuje [Semantic Versioning](https://semver.org/lang/pl/).
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-09-19
+
+### Added
+- Klasy: dowolny zalogowany użytkownik może założyć klasę (zostaje nauczycielem) i dostaje kod dołączenia; uczeń dołącza kodem (`/dolacz`), jedna aktywna klasa naraz.
+- Panel nauczyciela (`/nauczyciel`) - lista uczniów w klasie, ich punkty, data ostatniej aktywności, reset PIN-u ucznia.
+- Ranking (`/ranking`) - globalny i (dla zalogowanych w klasie) klasowy, okresy "ten tydzień"/"cały czas", widoczne tylko nicki i punkty.
+- Link do rankingu w górnym pasku na każdej stronie.
+
 ## [0.4.0] - 2026-09-19
 
 ### Added

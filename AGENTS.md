@@ -22,12 +22,20 @@ Educational games/exercises for kids (math, English alphabet) and adults (Englis
 
 ## Accounts & points (Etap 4)
 
-- Login is **nick + PIN** (`pin_hash` column, 4-6 digits) for everyone, including children - no email required, no personal data. Adults may *additionally* set an email + password at registration (`is_adult` flag) purely to enable Laravel's built-in password-reset flow (`Password::sendResetLink`/`Password::reset`, `App\Http\Controllers\Auth\PasswordResetController`) - nick+PIN accounts have no recovery path yet (planned: a teacher resets it, Etap 5).
+- Login is **nick + PIN** (`pin_hash` column, 4-6 digits) for everyone, including children - no email required, no personal data. Adults may *additionally* set an email + password at registration (`is_adult` flag) purely to enable Laravel's built-in password-reset flow (`Password::sendResetLink`/`Password::reset`, `App\Http\Controllers\Auth\PasswordResetController`) - nick+PIN accounts recover via their teacher (Etap 5: `GroupController::resetStudentPin`).
 - `App\Http\Controllers\Auth\AuthController` handles register/login/logout. Login is throttled 5/min per nick+IP via `RateLimiter` (same pattern as Fortify). `App\Support\NicknameFilter` blocks a baseline profanity/impersonation list - not exhaustive, extend `NicknameFilter::BLOCKED` as needed.
 - **Points are always computed server-side** (`App\Support\Scoring::pointsFor()`, a flat per-course/section table) - a game POSTs `{course, section, exercise_key, correct}` to `/attempts` (`AttemptController`), the client-sent `correct` boolean is the only input trusted, any `points` field in the request is ignored. `section` must be one of `Scoring::sections($course)` or the request is rejected (422).
 - `resources/js/composables/useAttempts.js` is the client side of this - `record(course, section, exerciseKey, correct)` is a no-op for guests (`page.props.auth.user` is null) and a fire-and-forget `fetch('/attempts')` otherwise. Every game calls it on each answered exercise: `multiplication.js` via an `onAttempt` callback passed into `useMultiplicationGame()`, `Alphabet.vue`/`IrregularVerbs.vue` inline in their answer handlers, `GrammarLesson.vue` in `onAnswered()` (needs a `section` prop from the page).
 - Guests keep the old localStorage-only scoring (`tabliczka.v1`, `abc_alfabet_progress_v2`) untouched - registering migrates it **once**, as a single capped (max 500) `guest-import` attempt row, not a per-answer replay.
 - `HandleInertiaRequests` shares `auth.user` (`{nick, points}` or `null`) to every page; `AppLayout.vue` renders the login/register links or nick+points+logout from it.
+
+## Groups & ranking (Etap 5)
+
+- Any logged-in user becomes a `teacher` (role flips on `POST /nauczyciel/klasy`) simply by naming a class - no separate approval step. `App\Models\Group` has a random unambiguous `join_code` (`Group::generateJoinCode()`, excludes 0/O/1/I).
+- A student belongs to at most **one** group at a time even though the underlying `group_user` table is many-to-many (`User::groups()`) - joining a new one replaces the old via `sync()`. `User::currentGroup()` is that convention's read side; don't add multi-group UI without revisiting this.
+- Teacher can't see a child's PIN (it's hashed) - `GroupController::resetStudentPin` only generates and flashes a new one once, for the teacher to relay directly. Scoped to groups the teacher owns (`abort_unless($group->owner_id === ...)`).
+- `App\Http\Controllers\RankingController` returns **only nick + points**, nothing else about a user - global (top 50) and, if the viewer is in a group, that group's ranking too, both filterable by `?period=week|all` (`withSum` scoped by `created_at >=` start of week).
+- Shared `status` Inertia prop (`HandleInertiaRequests`) carries one-off flash messages (group created + its code, joined a group, PIN reset) - read it as a plain page prop, e.g. `defineProps({ status })`, or via `usePage().props.status`.
 
 ## Conventions
 
