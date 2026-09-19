@@ -1,0 +1,69 @@
+{
+    "title": "Conditionals",
+    "subtitle": "Tryby warunkowe: zero, pierwszy, drugi, trzeci i mieszane.",
+    "sections": [
+        {
+            "id": "zero",
+            "title": "Conditional 0 - fakty, prawa natury",
+            "theory": "If + Present Simple, Present Simple. Używamy do ogólnych prawd, praw natury i rzeczy, które zawsze się sprawdzają.",
+            "exercises": [
+                { "id": "zero-1", "type": "choice", "prompt": "If you heat water to 100°C, it ___.", "options": ["boil", "boils", "boiled"], "answer": "boils" },
+                { "id": "zero-2", "type": "gap", "prompt": "If ice ___ (get) warm, it melts.", "accepted": ["gets"] },
+                { "id": "zero-3", "type": "choice", "prompt": "Plants die if they ___ get water.", "options": ["don't", "doesn't", "didn't"], "answer": "don't" },
+                { "id": "zero-4", "type": "gap", "prompt": "If you mix yellow and blue, you ___ (get) green.", "accepted": ["get"] },
+                { "id": "zero-5", "type": "choice", "prompt": "Water ___ if you cool it to 0°C.", "options": ["freeze", "freezes", "froze"], "answer": "freezes" },
+                { "id": "zero-6", "type": "gap", "prompt": "If it ___ (rain), the ground gets wet.", "accepted": ["rains"] }
+            ]
+        },
+        {
+            "id": "first",
+            "title": "Conditional 1 - realna przyszłość",
+            "theory": "If + Present Simple, will + bezokolicznik. Mówimy o realnych, możliwych sytuacjach w przyszłości.",
+            "exercises": [
+                { "id": "first-1", "type": "choice", "prompt": "If it rains tomorrow, we ___ stay at home.", "options": ["will", "would", "are"], "answer": "will" },
+                { "id": "first-2", "type": "gap", "prompt": "If you ___ (study), you will pass the exam.", "accepted": ["study"] },
+                { "id": "first-3", "type": "choice", "prompt": "She will be happy if you ___ her.", "options": ["call", "called", "calling"], "answer": "call" },
+                { "id": "first-4", "type": "gap", "prompt": "If I have time, I ___ (help) you.", "accepted": ["will help", "'ll help"] },
+                { "id": "first-5", "type": "choice", "prompt": "If we leave now, we ___ catch the train.", "options": ["will", "would", "did"], "answer": "will" },
+                { "id": "first-6", "type": "gap", "prompt": "You will get wet if you ___ (not/take) an umbrella.", "accepted": ["don't take"] }
+            ]
+        },
+        {
+            "id": "second",
+            "title": "Conditional 2 - nierealna teraźniejszość/przyszłość",
+            "theory": "If + Past Simple, would + bezokolicznik. Sytuacje nierealne, hipotetyczne, marzenia. Po 'if I/he/she' poprawną formą jest 'were' (If I were you...).",
+            "exercises": [
+                { "id": "second-1", "type": "choice", "prompt": "If I ___ rich, I would travel the world.", "options": ["were", "am", "will be"], "answer": "were" },
+                { "id": "second-2", "type": "gap", "prompt": "If you ___ (have) more time, you would learn a new language.", "accepted": ["had"] },
+                { "id": "second-3", "type": "choice", "prompt": "What would you do if you ___ a million dollars?", "options": ["win", "won", "would win"], "answer": "won" },
+                { "id": "second-4", "type": "gap", "prompt": "If she ___ (not/be) busy, she would come with us.", "accepted": ["weren't", "were not"] },
+                { "id": "second-5", "type": "choice", "prompt": "I would help you if I ___ you.", "options": ["was", "were", "am"], "answer": "were" },
+                { "id": "second-6", "type": "gap", "prompt": "If they ___ (know) the answer, they would tell us.", "accepted": ["knew"] }
+            ]
+        },
+        {
+            "id": "third",
+            "title": "Conditional 3 - nierealna przeszłość",
+            "theory": "If + Past Perfect, would have + III forma czasownika. Żałowanie, sytuacje z przeszłości, które się nie wydarzyły.",
+            "exercises": [
+                { "id": "third-1", "type": "choice", "prompt": "If I had studied, I ___ passed the exam.", "options": ["would have", "will have", "would"], "answer": "would have" },
+                { "id": "third-2", "type": "gap", "prompt": "If you had told me, I ___ (help) you.", "accepted": ["would have helped"] },
+                { "id": "third-3", "type": "choice", "prompt": "She would have come if she ___ invited.", "options": ["had been", "was", "has been"], "answer": "had been" },
+                { "id": "third-4", "type": "gap", "prompt": "If it ___ (not/rain), we would have gone for a walk.", "accepted": ["hadn't rained", "had not rained"] },
+                { "id": "third-5", "type": "choice", "prompt": "They wouldn't have missed the train if they ___ earlier.", "options": ["had left", "left", "would leave"], "answer": "had left" },
+                { "id": "third-6", "type": "gap", "prompt": "If I had known, I ___ (not/say) that.", "accepted": ["wouldn't have said", "would not have said"] }
+            ]
+        },
+        {
+            "id": "mixed",
+            "title": "Tryby mieszane",
+            "theory": "Łączymy części z różnych okresów warunkowych, gdy czas przyczyny i czas skutku są różne - np. skutek przeszłej decyzji trwający do dziś.",
+            "exercises": [
+                { "id": "mixed-1", "type": "choice", "prompt": "If I had taken that job, I ___ rich now.", "options": ["would be", "would have been", "will be"], "answer": "would be" },
+                { "id": "mixed-2", "type": "gap", "prompt": "If she ___ (study) medicine, she would be a doctor now.", "accepted": ["had studied"] },
+                { "id": "mixed-3", "type": "choice", "prompt": "If he weren't so lazy, he ___ finished the project by now.", "options": ["would have", "will have", "would"], "answer": "would have" },
+                { "id": "mixed-4", "type": "gap", "prompt": "I wouldn't be so tired now if I ___ (go) to bed earlier last night.", "accepted": ["had gone"] }
+            ]
+        }
+    ]
+}

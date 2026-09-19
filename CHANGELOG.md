@@ -7,6 +7,14 @@ projekt stosuje [Semantic Versioning](https://semver.org/lang/pl/).
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-09-19
+
+### Added
+- Trzy nowe sekcje angielskiego dla dorosłych: Czasowniki nieregularne (`/angielski/czasowniki-nieregularne` - fiszki, uzupełnij formę, quiz ze słuchu, poziomy A2/B1/B2), Conditionals i Wishes (`/angielski/conditionals`, `/angielski/wishes` - teoria + ćwiczenia).
+- Wspólny silnik ćwiczeń (`ExerciseCard.vue` + `GrammarLesson.vue`): typ `choice` (wybór) i `gap` (uzupełnij lukę), z licznikiem poprawnych odpowiedzi na żywo.
+- Kafelki "Dla dorosłych" na stronie głównej odblokowane (wcześniej "wkrótce").
+- Test integralności danych treści (`EnglishContentTest`).
+
 ## [0.2.0] - 2026-09-19
 
 ### Added

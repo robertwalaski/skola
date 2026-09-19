@@ -1,0 +1,40 @@
+{
+    "title": "Wishes",
+    "subtitle": "Wish, if only, would - jak mówić o życzeniach i żalu.",
+    "sections": [
+        {
+            "id": "present",
+            "title": "Wish + Past Simple - życzenia dotyczące teraźniejszości",
+            "theory": "Wish + czasownik w Past Simple, gdy chcemy, żeby coś w teraźniejszości było inne niż jest. Po 'wish I/he/she' zwykle używamy 'were'.",
+            "exercises": [
+                { "id": "present-1", "type": "gap", "prompt": "I wish I ___ (have) more free time.", "accepted": ["had"] },
+                { "id": "present-2", "type": "choice", "prompt": "She wishes she ___ taller.", "options": ["were", "is", "will be"], "answer": "were" },
+                { "id": "present-3", "type": "gap", "prompt": "I wish it ___ (not/rain) right now.", "accepted": ["weren't raining", "wasn't raining"] },
+                { "id": "present-4", "type": "choice", "prompt": "They wish they ___ here with us.", "options": ["were", "are", "will be"], "answer": "were" },
+                { "id": "present-5", "type": "gap", "prompt": "He wishes he ___ (speak) French.", "accepted": ["spoke"] }
+            ]
+        },
+        {
+            "id": "past",
+            "title": "Wish + Past Perfect - żal za przeszłość",
+            "theory": "Wish + Past Perfect, gdy żałujemy czegoś, co wydarzyło się (albo nie) w przeszłości.",
+            "exercises": [
+                { "id": "past-1", "type": "gap", "prompt": "I wish I ___ (study) harder for the exam.", "accepted": ["had studied"] },
+                { "id": "past-2", "type": "choice", "prompt": "She wishes she ___ that email.", "options": ["hadn't sent", "didn't send", "wouldn't send"], "answer": "hadn't sent" },
+                { "id": "past-3", "type": "gap", "prompt": "We wish we ___ (not/miss) the flight.", "accepted": ["hadn't missed", "had not missed"] },
+                { "id": "past-4", "type": "choice", "prompt": "He wishes he ___ to the party.", "options": ["had gone", "went", "would go"], "answer": "had gone" }
+            ]
+        },
+        {
+            "id": "would",
+            "title": "Wish + would / If only - irytacja i mocniejsze życzenia",
+            "theory": "Wish + would odnosi się do irytujących zachowań innych osób lub sytuacji, które chcemy, żeby się zmieniły. 'If only' jest mocniejszym, bardziej emocjonalnym odpowiednikiem 'wish'.",
+            "exercises": [
+                { "id": "would-1", "type": "gap", "prompt": "I wish you ___ (stop) making so much noise.", "accepted": ["would stop"] },
+                { "id": "would-2", "type": "choice", "prompt": "If only it ___ stop raining!", "options": ["would", "will", "could"], "answer": "would" },
+                { "id": "would-3", "type": "gap", "prompt": "I wish he ___ (be) more careful.", "accepted": ["would be"] },
+                { "id": "would-4", "type": "choice", "prompt": "If only I ___ speak Spanish!", "options": ["could", "would", "can"], "answer": "could" }
+            ]
+        }
+    ]
+}

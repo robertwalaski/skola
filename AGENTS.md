@@ -16,7 +16,8 @@ Educational games/exercises for kids (math, English alphabet) and adults (Englis
 - `resources/js/Components/` - reusable UI (e.g. `CourseTile.vue`).
 - `resources/js/composables/` - `useTrans()` reads the `translations` Inertia prop, `useSpeech()` wraps the Web Speech API (voice pick, `speakSequence()` chained on real `onend`, not a fixed timeout).
 - `resources/js/games/` - per-game logic kept out of the .vue file (e.g. `multiplication.js`, `alphabetProgress.js`), so it's testable/reusable independent of the component.
-- `resources/content/` - exercise/game data as JSON (not DB), e.g. `english/alphabet.json`. Will also hold irregular verbs, conditionals, wishes (Etap 3).
+- `resources/content/` - exercise/game data as JSON (not DB): `english/alphabet.json`, `english/irregular-verbs.json` (level A2/B1/B2, self-assigned - source table has no levels), `english/conditionals.json` + `english/wishes.json` (theory + exercises per section). Covered by a content-integrity Pest test (`tests/Feature/EnglishContentTest.php`) so a typo in the data fails CI-locally, not silently in the browser.
+- `resources/js/Components/ExerciseCard.vue` + `GrammarLesson.vue` - shared engine for the two grammar lessons (Conditionals, Wishes): `type: "choice"` (pick the right option) or `"gap"` (fill the blank, `accepted` is a list of accepted strings, matched case/whitespace-insensitively). A lesson page is just `<GrammarLesson :content="conditionalsJson" />` - see `Pages/English/Conditionals.vue`.
 - `lang/{pl,cs,sk,de}.json` - UI strings only, shared to Vue via `HandleInertiaRequests::share()` as the `translations` prop for the current `app()->getLocale()`. Content-level translations (exercise meanings) live inline in the `resources/content/*.json` files instead, keyed per language.
 
 ## Conventions

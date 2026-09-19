@@ -55,29 +55,23 @@ const languages = [
             <h2 class="mb-3 text-lg font-semibold text-ink-soft">{{ t('home.section.adults') }}</h2>
             <div class="grid gap-4 sm:grid-cols-3">
                 <CourseTile
-                    disabled
+                    href="/angielski/czasowniki-nieregularne"
                     emoji="📖"
                     :title="t('course.irregular_verbs.title')"
                     :desc="t('course.irregular_verbs.desc')"
-                >
-                    <template #badge>{{ t('home.coming_soon') }}</template>
-                </CourseTile>
+                />
                 <CourseTile
-                    disabled
+                    href="/angielski/conditionals"
                     emoji="🔀"
                     :title="t('course.conditionals.title')"
                     :desc="t('course.conditionals.desc')"
-                >
-                    <template #badge>{{ t('home.coming_soon') }}</template>
-                </CourseTile>
+                />
                 <CourseTile
-                    disabled
+                    href="/angielski/wishes"
                     emoji="💭"
                     :title="t('course.wishes.title')"
                     :desc="t('course.wishes.desc')"
-                >
-                    <template #badge>{{ t('home.coming_soon') }}</template>
-                </CourseTile>
+                />
             </div>
         </section>
     </AppLayout>
