@@ -7,6 +7,16 @@ projekt stosuje [Semantic Versioning](https://semver.org/lang/pl/).
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-19
+
+### Added
+- Port tabliczki mnożenia (`/matematyka/tabliczka`) na Vue - ta sama logika losowania/punktacji co w wersji statycznej, ten sam klucz `localStorage` (rekord i błędy zachowane), ten sam responsywny układ na telefonie/tablecie w poziomie.
+- Port gry alfabetycznej (`/angielski/alfabet`) na Vue - fiszki, brakująca literka, quiz ze słuchu; ten sam klucz postępu w `localStorage`.
+- `useSpeech()` - odtwarzanie głosowe litera->słowo teraz czeka na faktyczny koniec poprzedniej wypowiedzi (`onend`), zamiast sztywnych 10 sekund jak w starej wersji.
+
+### Removed
+- Statyczne strony w `public/legacy/` (zastąpione przez powyższe, funkcje 1:1 zweryfikowane w przeglądarce).
+
 ## [0.1.0] - 2026-09-19
 
 ### Added

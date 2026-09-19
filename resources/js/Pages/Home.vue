@@ -37,13 +37,13 @@ const languages = [
             <h2 class="mb-3 text-lg font-semibold text-ink-soft">{{ t('home.section.kids') }}</h2>
             <div class="grid gap-4 sm:grid-cols-2">
                 <CourseTile
-                    href="/legacy/tabliczka.html"
+                    href="/matematyka/tabliczka"
                     emoji="🔢"
                     :title="t('course.multiplication.title')"
                     :desc="t('course.multiplication.desc')"
                 />
                 <CourseTile
-                    href="/legacy/alfabet.html"
+                    href="/angielski/alfabet"
                     emoji="🔤"
                     :title="t('course.alphabet.title')"
                     :desc="t('course.alphabet.desc')"

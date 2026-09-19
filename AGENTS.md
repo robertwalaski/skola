@@ -14,10 +14,10 @@ Educational games/exercises for kids (math, English alphabet) and adults (Englis
 - `resources/js/Pages/*.vue` - Inertia pages (one per route).
 - `resources/js/Layouts/AppLayout.vue` - shared shell (header/back-link/footer).
 - `resources/js/Components/` - reusable UI (e.g. `CourseTile.vue`).
-- `resources/js/composables/` - `useTrans()` reads the `translations` Inertia prop.
-- `resources/content/` - exercise/game data as JSON (not DB), e.g. alphabet letters, irregular verbs.
+- `resources/js/composables/` - `useTrans()` reads the `translations` Inertia prop, `useSpeech()` wraps the Web Speech API (voice pick, `speakSequence()` chained on real `onend`, not a fixed timeout).
+- `resources/js/games/` - per-game logic kept out of the .vue file (e.g. `multiplication.js`, `alphabetProgress.js`), so it's testable/reusable independent of the component.
+- `resources/content/` - exercise/game data as JSON (not DB), e.g. `english/alphabet.json`. Will also hold irregular verbs, conditionals, wishes (Etap 3).
 - `lang/{pl,cs,sk,de}.json` - UI strings only, shared to Vue via `HandleInertiaRequests::share()` as the `translations` prop for the current `app()->getLocale()`. Content-level translations (exercise meanings) live inline in the `resources/content/*.json` files instead, keyed per language.
-- `public/legacy/` - the original static HTML games (pre-Laravel), kept reachable while being ported page by page. Delete once a page's Vue port reaches parity (see plan Etap 2).
 
 ## Conventions
 

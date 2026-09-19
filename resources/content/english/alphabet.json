@@ -1,0 +1,37 @@
+{
+    "letters": [
+        { "letter": "A", "word": "Apple", "emoji": "🍎" },
+        { "letter": "B", "word": "Ball", "emoji": "⚽" },
+        { "letter": "C", "word": "Cat", "emoji": "🐱" },
+        { "letter": "D", "word": "Dog", "emoji": "🐶" },
+        { "letter": "E", "word": "Elephant", "emoji": "🐘" },
+        { "letter": "F", "word": "Fish", "emoji": "🐟" },
+        { "letter": "G", "word": "Giraffe", "emoji": "🦒" },
+        { "letter": "H", "word": "House", "emoji": "🏠" },
+        { "letter": "I", "word": "Ice cream", "emoji": "🍦" },
+        { "letter": "J", "word": "Juice", "emoji": "🧃" },
+        { "letter": "K", "word": "Kite", "emoji": "🪁" },
+        { "letter": "L", "word": "Lion", "emoji": "🦁" },
+        { "letter": "M", "word": "Moon", "emoji": "🌙" },
+        { "letter": "N", "word": "Nest", "emoji": "🪺" },
+        { "letter": "O", "word": "Orange", "emoji": "🍊" },
+        { "letter": "P", "word": "Pig", "emoji": "🐷" },
+        { "letter": "Q", "word": "Queen", "emoji": "👸" },
+        { "letter": "R", "word": "Rabbit", "emoji": "🐰" },
+        { "letter": "S", "word": "Sun", "emoji": "☀️" },
+        { "letter": "T", "word": "Tree", "emoji": "🌳" },
+        { "letter": "U", "word": "Umbrella", "emoji": "☂️" },
+        { "letter": "V", "word": "Van", "emoji": "🚐" },
+        { "letter": "W", "word": "Whale", "emoji": "🐳" },
+        { "letter": "X", "word": "X-ray", "emoji": "🩻" },
+        { "letter": "Y", "word": "Yoyo", "emoji": "🪀" },
+        { "letter": "Z", "word": "Zebra", "emoji": "🦓" }
+    ],
+    "batches": [
+        { "name": "A-G", "from": 0, "to": 7 },
+        { "name": "H-N", "from": 7, "to": 14 },
+        { "name": "O-T", "from": 14, "to": 20 },
+        { "name": "U-Z", "from": 20, "to": 26 },
+        { "name": "Cały alfabet (A-Z)", "from": 0, "to": 26 }
+    ]
+}
