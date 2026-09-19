@@ -3,12 +3,14 @@ import { computed, reactive, ref } from 'vue';
 import AppLayout from '../../Layouts/AppLayout.vue';
 import data from '../../../content/english/irregular-verbs.json';
 import { useSpeech } from '../../composables/useSpeech.js';
+import { useAttempts } from '../../composables/useAttempts.js';
 
 const VERBS = data.verbs;
 const LEVELS = ['A2', 'B1', 'B2'];
 const MODE_LABELS = { flash: 'Fiszki', gap: 'Uzupełnij formę', listen: 'Quiz ze słuchu' };
 
 const { speakSequence, warning } = useSpeech();
+const { record } = useAttempts();
 
 function shuffle(arr) {
     const a = arr.slice();
@@ -141,6 +143,7 @@ function checkGap() {
     const okPart = acceptableForms(gap.target.participle).includes(normalize(gap.partInput));
     gap.correct = okPast && okPart;
     gap.answered = true;
+    record('english', 'irregular-verbs', `gap:${gap.target.base}`, gap.correct);
     if (gap.correct) {
         round.score++;
         round.streak++;
@@ -174,6 +177,7 @@ function handleListenAnswer(oi) {
     if (round.locked) return;
     round.locked = true;
     listen.answeredIndex = oi;
+    record('english', 'irregular-verbs', `listen:${VERBS[listen.correctIndex].base}`, oi === listen.correctIndex);
     if (oi === listen.correctIndex) {
         round.score++;
         round.streak++;

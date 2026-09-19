@@ -4,5 +4,5 @@ import content from '../../../content/english/wishes.json';
 </script>
 
 <template>
-    <GrammarLesson :content="content" />
+    <GrammarLesson :content="content" section="wishes" />
 </template>

@@ -40,7 +40,7 @@ export function fromKey(k) {
     return { op, x: Number(x), y: Number(y) };
 }
 
-export function useMultiplicationGame() {
+export function useMultiplicationGame(onAttempt) {
     const mem = reactive(loadMem());
 
     const screen = ref('setup'); // 'setup' | 'game' | 'result'
@@ -159,6 +159,7 @@ export function useMultiplicationGame() {
         S.queue.push(S.cur);
         S.streak = 0;
         feedback.value = { text: `${timeUp ? 'Czas minął. ' : 'Nie. '}Poprawnie: ${val(S.cur)}`, cls: 'no' };
+        onAttempt?.(k, false);
         setTimeout(next, 1700);
     }
 
@@ -179,6 +180,7 @@ export function useMultiplicationGame() {
             const pts = 10 + bonus + (S.streak >= 5 ? 10 : 0);
             S.score += pts;
             feedback.value = { text: `Dobrze, +${pts}`, cls: 'ok' };
+            onAttempt?.(key(S.cur), true);
             setTimeout(next, 600);
         } else {
             miss(false);

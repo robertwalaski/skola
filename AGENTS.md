@@ -20,8 +20,18 @@ Educational games/exercises for kids (math, English alphabet) and adults (Englis
 - `resources/js/Components/ExerciseCard.vue` + `GrammarLesson.vue` - shared engine for the two grammar lessons (Conditionals, Wishes): `type: "choice"` (pick the right option) or `"gap"` (fill the blank, `accepted` is a list of accepted strings, matched case/whitespace-insensitively). A lesson page is just `<GrammarLesson :content="conditionalsJson" />` - see `Pages/English/Conditionals.vue`.
 - `lang/{pl,cs,sk,de}.json` - UI strings only, shared to Vue via `HandleInertiaRequests::share()` as the `translations` prop for the current `app()->getLocale()`. Content-level translations (exercise meanings) live inline in the `resources/content/*.json` files instead, keyed per language.
 
+## Accounts & points (Etap 4)
+
+- Login is **nick + PIN** (`pin_hash` column, 4-6 digits) for everyone, including children - no email required, no personal data. Adults may *additionally* set an email + password at registration (`is_adult` flag) purely to enable Laravel's built-in password-reset flow (`Password::sendResetLink`/`Password::reset`, `App\Http\Controllers\Auth\PasswordResetController`) - nick+PIN accounts have no recovery path yet (planned: a teacher resets it, Etap 5).
+- `App\Http\Controllers\Auth\AuthController` handles register/login/logout. Login is throttled 5/min per nick+IP via `RateLimiter` (same pattern as Fortify). `App\Support\NicknameFilter` blocks a baseline profanity/impersonation list - not exhaustive, extend `NicknameFilter::BLOCKED` as needed.
+- **Points are always computed server-side** (`App\Support\Scoring::pointsFor()`, a flat per-course/section table) - a game POSTs `{course, section, exercise_key, correct}` to `/attempts` (`AttemptController`), the client-sent `correct` boolean is the only input trusted, any `points` field in the request is ignored. `section` must be one of `Scoring::sections($course)` or the request is rejected (422).
+- `resources/js/composables/useAttempts.js` is the client side of this - `record(course, section, exerciseKey, correct)` is a no-op for guests (`page.props.auth.user` is null) and a fire-and-forget `fetch('/attempts')` otherwise. Every game calls it on each answered exercise: `multiplication.js` via an `onAttempt` callback passed into `useMultiplicationGame()`, `Alphabet.vue`/`IrregularVerbs.vue` inline in their answer handlers, `GrammarLesson.vue` in `onAnswered()` (needs a `section` prop from the page).
+- Guests keep the old localStorage-only scoring (`tabliczka.v1`, `abc_alfabet_progress_v2`) untouched - registering migrates it **once**, as a single capped (max 500) `guest-import` attempt row, not a per-answer replay.
+- `HandleInertiaRequests` shares `auth.user` (`{nick, points}` or `null`) to every page; `AppLayout.vue` renders the login/register links or nick+points+logout from it.
+
 ## Conventions
 
 - Design tokens (colors, radius) carried over from the legacy static pages live in `resources/css/app.css` under `@theme` (Tailwind v4 generates utilities from them, e.g. `bg-paper`, `text-ink-soft`, `rounded-app`).
 - Only `pl` has translations right now; the language switcher UI shows cs/sk/de as disabled ("wkrótce") until Etap 6.
 - No CI yet in this repo - run Pint + Pest locally before every commit.
+- Feature tests use a real (in-memory sqlite) test DB via `RefreshDatabase` (`tests/Pest.php`) - don't mock the DB.

@@ -7,6 +7,15 @@ projekt stosuje [Semantic Versioning](https://semver.org/lang/pl/).
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-09-19
+
+### Added
+- Konta: rejestracja nick + PIN (bez danych osobowych), opcjonalny e-mail + hasło dla dorosłych z odzyskiwaniem hasła mailem, logowanie z limitem prób, filtr niedozwolonych nicków.
+- `POST /attempts` - serwer nalicza punkty za każdą próbę wg reguły per sekcja (klient zgłasza tylko czy odpowiedź była poprawna).
+- Wszystkie gry (tabliczka, alfabet, czasowniki nieregularne, conditionals, wishes) zgłaszają wynik do serwera, gdy uczeń jest zalogowany; gość dalej gra lokalnie jak dotąd.
+- Jednorazowe przeniesienie punktów gościa (z localStorage) przy rejestracji, ograniczone do 500 pkt.
+- Krótka polityka prywatności (`/prywatnosc`).
+
 ## [0.3.0] - 2026-09-19
 
 ### Added

@@ -4,5 +4,5 @@ import content from '../../../content/english/conditionals.json';
 </script>
 
 <template>
-    <GrammarLesson :content="content" />
+    <GrammarLesson :content="content" section="conditionals" />
 </template>

@@ -3,8 +3,10 @@ import { onBeforeUnmount, onMounted, reactive, ref } from 'vue';
 import AppLayout from '../../Layouts/AppLayout.vue';
 import Keypad from '../../Components/Keypad.vue';
 import { useMultiplicationGame } from '../../games/multiplication.js';
+import { useAttempts } from '../../composables/useAttempts.js';
 
-const g = useMultiplicationGame();
+const { record } = useAttempts();
+const g = useMultiplicationGame((exerciseKey, correct) => record('math', 'multiplication', exerciseKey, correct));
 
 const tables = Array.from({ length: 11 }, (_, i) => i + 2); // 2..12
 const selected = reactive(new Set([2, 3]));

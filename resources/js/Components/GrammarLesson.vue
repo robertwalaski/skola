@@ -2,15 +2,19 @@
 import { computed, reactive } from 'vue';
 import AppLayout from '../Layouts/AppLayout.vue';
 import ExerciseCard from './ExerciseCard.vue';
+import { useAttempts } from '../composables/useAttempts.js';
 
 const props = defineProps({
     content: { type: Object, required: true },
+    section: { type: String, required: true }, // 'conditionals' | 'wishes' - matches Scoring's section key
 });
 
+const { record } = useAttempts();
 const results = reactive({});
 
 function onAnswered(id, ok) {
     results[id] = ok;
+    record('english', props.section, id, ok);
 }
 
 const totalExercises = computed(() => props.content.sections.reduce((sum, s) => sum + s.exercises.length, 0));

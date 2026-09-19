@@ -3,6 +3,7 @@ import { computed, reactive, ref } from 'vue';
 import AppLayout from '../../Layouts/AppLayout.vue';
 import alphabetData from '../../../content/english/alphabet.json';
 import { useSpeech } from '../../composables/useSpeech.js';
+import { useAttempts } from '../../composables/useAttempts.js';
 import { MODES, batchDone, emptyProgress, isUnlocked, loadProgress, modesDone, saveProgress } from '../../games/alphabetProgress.js';
 
 const LETTERS = alphabetData.letters;
@@ -10,6 +11,7 @@ const BATCHES = alphabetData.batches;
 const MODE_LABELS = { flash: 'Fiszki', missing: 'Brakująca literka', listen: 'Usłysz i wybierz' };
 
 const { speakSequence, warning } = useSpeech();
+const { record } = useAttempts();
 
 const progress = reactive(loadProgress(BATCHES.length));
 
@@ -180,6 +182,7 @@ function handleMissingAnswer(oi) {
     if (round.locked) return;
     round.locked = true;
     missing.answeredIndex = oi;
+    record('english', 'alphabet', `missing:${LETTERS[missing.correctIndex].letter}`, oi === missing.correctIndex);
     if (oi === missing.correctIndex) {
         round.score++;
         round.streak++;
@@ -234,6 +237,7 @@ function handleListenAnswer(oi) {
     if (round.locked) return;
     round.locked = true;
     listen.answeredIndex = oi;
+    record('english', 'alphabet', `listen:${LETTERS[listen.correctIndex].letter}`, oi === listen.correctIndex);
     if (oi === listen.correctIndex) {
         round.score++;
         round.streak++;
