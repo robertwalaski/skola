@@ -1,0 +1,18 @@
+{
+    "app.name": "Szkoła",
+    "home.title": "Szkoła",
+    "home.subtitle": "Gry i ćwiczenia do nauki",
+    "home.section.kids": "Dla dzieci",
+    "home.section.adults": "Dla dorosłych",
+    "home.coming_soon": "Wkrótce",
+    "course.multiplication.title": "Tabliczka mnożenia",
+    "course.multiplication.desc": "Trening mnożenia i dzielenia",
+    "course.alphabet.title": "Alfabet angielski",
+    "course.alphabet.desc": "Fiszki, brakująca literka, quiz ze słuchu",
+    "course.irregular_verbs.title": "Czasowniki nieregularne",
+    "course.irregular_verbs.desc": "Fiszki i ćwiczenia z form czasowników",
+    "course.conditionals.title": "Conditionals",
+    "course.conditionals.desc": "Tryby warunkowe 0/1/2/3",
+    "course.wishes.title": "Wishes",
+    "course.wishes.desc": "Wish, if only, would"
+}
